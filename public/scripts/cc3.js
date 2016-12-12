@@ -1,7 +1,5 @@
 console.log('js');
 
-var jokes = [];
-
 $(document).ready(function() {
     console.log('JQ');
     getJokes();
@@ -86,18 +84,16 @@ function sortJokes() {
             displayJokes(response.jokes);
         }
     });
-    displayJokes(jokes);
 }
 
 function displayJokes(jokeArray) {
-    jokes = jokeArray;
     var htmlString = '<div class="row">' +
     '<a><h5 class="col-xs-2 col-xs-offset-1 joke-header" data-sort="whoseJoke">Joke Author <span class="glyphicon glyphicon-sort-by-alphabet"></span></h5></a>' +
     '<a><h5 class="col-xs-3 joke-header" data-sort="jokeQuestion">Setup <span class="glyphicon glyphicon-sort-by-alphabet"></span></h5></a>' +
     '<a><h5 class="col-xs-4 joke-header" data-sort="punchLine">Punch Line <span class="glyphicon glyphicon-sort-by-alphabet"></span></h5></a>' +
     '<h5 class="col-xs-1">Remove</h5></div>';
 
-    jokes.forEach(function(joke, index) {
+    jokeArray.forEach(function(joke, index) {
         htmlString += '<div class="joke row" data-index="' + index + '">';
         htmlString += '<p class="col-xs-2 col-xs-offset-1">' + joke.whoseJoke + '</p>';
         htmlString += '<p class="col-xs-3">' + joke.jokeQuestion + '</p>';
