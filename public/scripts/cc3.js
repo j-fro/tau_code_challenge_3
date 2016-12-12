@@ -1,11 +1,12 @@
-console.log( 'js' );
+console.log('js');
 
-$( document ).ready( function(){
-  console.log( 'JQ' );
-  getJokes();
-  $( '#addJokeButton' ).on( 'click', function(){
-    console.log( 'addJokeButton on click');
-  }); // end addJokeButton on click
+$(document).ready(function() {
+    console.log('JQ');
+    getJokes();
+    $('#addJokeButton').on('click', function() {
+        console.log('addJokeButton on click');
+        addNewJoke();
+    }); // end addJokeButton on click
 }); // end doc ready
 
 function getJokes() {
@@ -17,6 +18,41 @@ function getJokes() {
             displayJokes(response.jokes);
         }
     });
+}
+
+function addNewJoke() {
+    // Reset error classes
+    $('#whoseJokeIn').removeClass('no-input');
+    $('#questionIn').removeClass('no-input');
+    $('#punchlineIn').removeClass('no-input');
+    var author = $('#whoseJokeIn').val();
+    var setup = $('#questionIn').val();
+    var punchLine = $('#punchlineIn').val();
+    if (author.length < 1) {
+        $('#whoseJokeIn').addClass('no-input');
+    } else if (setup.length < 1) {
+        $('#questionIn').addClass('no-input');
+    } else if (punchLine.length < 1) {
+        $('#punchlineIn').addClass('no-input');
+    } else {
+        $('#whoseJokeIn').removeClass('no-input');
+        $('#questionIn').removeClass('no-input');
+        $('#punchlineIn').removeClass('no-input');
+        var jokeToSend = {
+            whoseJoke: author,
+            jokeQuestion: setup,
+            punchLine: punchLine
+        };
+        $.ajax({
+            url: '/',
+            type: 'POST',
+            data: jokeToSend,
+            success: function(response) {
+                console.log('response from server', response);
+                displayJokes(response.jokes);
+            }
+        });
+    }
 }
 
 function displayJokes(jokeArray) {
