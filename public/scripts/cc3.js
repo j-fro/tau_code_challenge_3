@@ -92,9 +92,9 @@ function sortJokes() {
 function displayJokes(jokeArray) {
     jokes = jokeArray;
     var htmlString = '<div class="row">' +
-    '<h5 class="col-xs-1 col-xs-offset-1 joke-header" data-sort="whoseJoke">Joke Author</h5>' +
-    '<h5 class="col-xs-4 joke-header" data-sort="jokeQuestion">Setup</h5>' +
-    '<h5 class="col-xs-4 joke-header" data-sort="punchLine">Punch Line</h5>' +
+    '<a><h5 class="col-xs-1 col-xs-offset-1 joke-header" data-sort="whoseJoke">Joke Author</h5></a>' +
+    '<a><h5 class="col-xs-4 joke-header" data-sort="jokeQuestion">Setup</h5></a>' +
+    '<a><h5 class="col-xs-4 joke-header" data-sort="punchLine">Punch Line</h5></a>' +
     '<h5 class="col-xs-1">Remove</h5></div>';
 
     jokes.forEach(function(joke, index) {
@@ -102,7 +102,7 @@ function displayJokes(jokeArray) {
         htmlString += '<p class="col-xs-1 col-xs-offset-1">' + joke.whoseJoke + '</p>';
         htmlString += '<p class="col-xs-4">' + joke.jokeQuestion + '</p>';
         htmlString += '<p class="col-xs-4">' + joke.punchLine + '</p>';
-        htmlString += '<button class="remove-joke-button btn col-xs-1">X</button>';
+        htmlString += '<button class="remove-joke-button btn btn-danger col-xs-1">X</button>';
         htmlString += '</div>';
     });
     $('#outputDiv').html(htmlString);
