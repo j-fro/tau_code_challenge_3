@@ -56,12 +56,13 @@ function addNewJoke() {
 }
 
 function displayJokes(jokeArray) {
-    var htmlString = '<div class="joke-header"><p>Joke Author</p><p>Setup</p><p>Punch Line</p></div>';
+    var htmlString = '<div class="joke-header row"><h5 class="col-xs-1 col-xs-offset-1">Joke Author</h5><h5 class="col-xs-4">Setup</h5><h5 class="col-xs-4">Punch Line</h5><h5 class="col-xs-1">Remove</h5></div>';
     jokeArray.forEach(function(joke) {
-        htmlString += '<div class="joke">';
-        htmlString += '<p>' + joke.whoseJoke + '</p>';
-        htmlString += '<p>' + joke.jokeQuestion + '</p>';
-        htmlString += '<p>' + joke.punchLine + '</p>';
+        htmlString += '<div class="joke row">';
+        htmlString += '<p class="col-xs-1 col-xs-offset-1">' + joke.whoseJoke + '</p>';
+        htmlString += '<p class="col-xs-4">' + joke.jokeQuestion + '</p>';
+        htmlString += '<p class="col-xs-4">' + joke.punchLine + '</p>';
+        htmlString += '<button class="delete-joke btn col-xs-1">X</button>';
         htmlString += '</div>';
     });
     $('#outputDiv').html(htmlString);

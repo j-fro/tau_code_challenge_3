@@ -40,4 +40,4 @@ To-do
 [x] POST new jokes to the server
 * Client:
 [x] Display jokes on DOM
-[] Collect input and send new joke
+[x] Collect input and send new joke
