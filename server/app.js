@@ -6,6 +6,7 @@ var bodyParser = require( 'body-parser' );
 var urlEncodedParser = bodyParser.urlencoded( { extended: true } );
 // use bodyParser.urlencoded throughout the app with this:
 app.use( bodyParser.urlencoded( { extended: false } ) );
+app.use(bodyParser.json());
 // initial jokes provided by the client
 jokes = [
   {
@@ -30,15 +31,28 @@ jokes = [
   }
 ];
 
-// spin up server
-app.listen( 3333, function(){
-  console.log( 'server up on 3333' );
-}); // end spin up server
+app.post('/', function(req, res) {
+    console.log('posting jokes', req.body);
+    jokes.push(req.body);
+    res.send({ jokes: jokes });
+});
+
+app.get('/jokes', function(req, res) {
+    console.log('getting jokes');
+    res.send({ jokes: jokes });
+});
 
 app.get( '/', function( req, res ){
   // base url
   console.log( 'base url hit' );
   res.sendFile( path.resolve( 'views/index.html' ) );
 }); // end base url
+
+// spin up server
+app.listen( 3333, function(){
+  console.log( 'server up on 3333' );
+}); // end spin up server
+
+
 
 app.use( express.static( 'public' ) );
