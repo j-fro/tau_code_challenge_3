@@ -46,6 +46,22 @@ app.post('/removeJoke', function(req, res) {
     });
 });
 
+app.post('/sort', function(req, res) {
+    console.log('sorting jokes by', req.body);
+    jokes.sort(function(a, b) {
+        a = a[req.body.sort].toLowerCase();
+        b = b[req.body.sort].toLowerCase();
+        if (a > b) {
+            return 1;
+        } else if (a < b) {
+            return -1;
+        } else {
+            return 0;
+        }
+    });
+    res.send({jokes: jokes});
+});
+
 app.get('/jokes', function(req, res) {
     console.log('getting jokes');
     res.send({

@@ -75,17 +75,15 @@ function removeJoke() {
 }
 
 function sortJokes() {
-    var sortType = $(this).data('sort');
+    var sortType = $(this).data();
     console.log('sorting jokes', sortType);
-    jokes.sort(function(a, b) {
-        a = a[sortType].toLowerCase();
-        b = b[sortType].toLowerCase();
-        if (a > b) {
-            return 1;
-        } else if (a < b) {
-            return -1;
-        } else {
-            return 0;
+    $.ajax({
+        url: '/sort',
+        type: 'POST',
+        data: sortType,
+        success: function(response) {
+            console.log('response from server', response);
+            displayJokes(response.jokes);
         }
     });
     displayJokes(jokes);
