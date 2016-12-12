@@ -37,6 +37,12 @@ app.post('/', function(req, res) {
     res.send({ jokes: jokes });
 });
 
+app.post('/removeJoke', function(req, res) {
+    console.log('removeing joke', req.body);
+    jokes.splice(req.body.index, 1);
+    res.send({ jokes: jokes });
+});
+
 app.get('/jokes', function(req, res) {
     console.log('getting jokes');
     res.send({ jokes: jokes });

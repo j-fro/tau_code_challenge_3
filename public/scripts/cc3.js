@@ -7,6 +7,7 @@ $(document).ready(function() {
         console.log('addJokeButton on click');
         addNewJoke();
     }); // end addJokeButton on click
+    $(document).on('click', '.remove-joke-button', removeJoke);
 }); // end doc ready
 
 function getJokes() {
@@ -55,14 +56,28 @@ function addNewJoke() {
     }
 }
 
+function removeJoke() {
+    jokeIdToRemove = $(this).parent().data();
+    console.log('removing joke', jokeIdToRemove);
+    $.ajax({
+        url: '/removeJoke',
+        type: 'POST',
+        data: jokeIdToRemove,
+        success: function(response) {
+            console.log('response from server', response);
+            displayJokes(response.jokes);
+        }
+    });
+}
+
 function displayJokes(jokeArray) {
     var htmlString = '<div class="joke-header row"><h5 class="col-xs-1 col-xs-offset-1">Joke Author</h5><h5 class="col-xs-4">Setup</h5><h5 class="col-xs-4">Punch Line</h5><h5 class="col-xs-1">Remove</h5></div>';
-    jokeArray.forEach(function(joke) {
-        htmlString += '<div class="joke row">';
+    jokeArray.forEach(function(joke, index) {
+        htmlString += '<div class="joke row" data-index="' + index + '">';
         htmlString += '<p class="col-xs-1 col-xs-offset-1">' + joke.whoseJoke + '</p>';
         htmlString += '<p class="col-xs-4">' + joke.jokeQuestion + '</p>';
         htmlString += '<p class="col-xs-4">' + joke.punchLine + '</p>';
-        htmlString += '<button class="delete-joke btn col-xs-1">X</button>';
+        htmlString += '<button class="remove-joke-button btn col-xs-1">X</button>';
         htmlString += '</div>';
     });
     $('#outputDiv').html(htmlString);
