@@ -78,9 +78,11 @@ function sortJokes() {
     var sortType = $(this).data('sort');
     console.log('sorting jokes', sortType);
     jokes.sort(function(a, b) {
-        if (a[sortType] > b[sortType]) {
+        a = a[sortType].toLowerCase();
+        b = b[sortType].toLowerCase();
+        if (a > b) {
             return 1;
-        } else if (a[sortType] < b[sortType]) {
+        } else if (a < b) {
             return -1;
         } else {
             return 0;
