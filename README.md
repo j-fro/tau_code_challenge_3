@@ -32,3 +32,12 @@ Overview
 * the user should be able to add jokes using the input form
 
 Remember to work in small increments and test often. If you want to take things further, first push the working basic mode to your github and update it after.
+
+To-do
+-----
+* Server:
+[x] GET jokes from the server
+[x] POST new jokes to the server
+* Client:
+[x] Display jokes on DOM
+[] Collect input and send new joke
